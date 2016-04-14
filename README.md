@@ -20,12 +20,20 @@ I have been bitten by it too many times,
 and prefer using `wpa_supplicant` directly instead.
 
 ## Finish the installation in a minimal fashion.
-The structure will be as follows:
 Try to get a bootable installation as quickly as possible.
 Before when I was using Arch, I would try to get everything (ie a Desktop Enviroment) installed with pacstrap.
 It felt great booting into your system for the first time, and not being greeted by a console demanding more work.
 However if your using source-based distros this will diffentively not scale.
-So in order to maintain an uniform structure, the installation of things not required to boot will not be done on the liveUSB.
+So in order to maintain an uniform structure, the installation of things not required to boot will not be included.
+
+### Other things might be removed
+- locale related stuff
+- log installation (maybe, since you don't have anything to log yet)
+
+### Things that are needed
+- If you have multiple partitions: fstab and maybe initramfs
+- If an essential partition isn't ext4: the needed filesystem package installed
+
 
 
 [1]: https://wiki.archlinux.org/index.php/Installation_guide
