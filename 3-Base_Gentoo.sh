@@ -9,12 +9,12 @@ function install_base {
 installation_steps+=(install_base)
 function configure_base {
 
-         alias nano="nano --syntax=sh"
-         nano /mnt/gentoo/etc/fstab
-         nano /mnt/gentoo/etc/hosts
-         nano /mnt/gentoo/etc/conf.d/hostname
-         nano /mnt/gentoo/etc/conf.d/keymaps
-         nano /mnt/gentoo/etc/conf.d/hwclock
-         nano /mnt/gentoo/etc/rc.conf
+         alias nano="nano --operatingdir=/mnt/gentoo/etc --syntax=sh"
+         nano fstab
+         nano hosts
+         nano conf.d/hostname
+         nano conf.d/keymaps
+         nano conf.d/hwclock
+         nano rc.conf
          unalias nano
 }
