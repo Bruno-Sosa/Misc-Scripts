@@ -1,10 +1,12 @@
 #!/bin/bash
 
+installation_steps+=(install_base)
 function install_base {
          cd /mnt/gentoo
          tar xvjpf ~/stage3-*.tar.bz2 --xattrs
 }
 
+installation_steps+=(install_base)
 function configure_base {
 
          alias nano="nano --syntax=sh"
