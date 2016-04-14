@@ -17,21 +17,25 @@ function start_wifi {
          killall wpa_supplicant # Prevent already running errors
          killall dhcpcd         # Prevent already running errors
 
-         WPA_config_file='/etc/wpa_supplicant/wpa_supplicant.conf'
-
          choose_network_infertace
-         wpa_supplicant -B -i "${Network_interface}" -c "${WPA_config_file}"
+         
+         WPA_config_file='/etc/wpa_supplicant/wpa_supplicant.conf'
+         wpa_supplicant -B \
+         -i "${Network_interface}" \
+         -c "${WPA_config_file}"
 
-         wpa_cli scan; echo "Scanning..."; sleep 3s
+         wpa_cli scan
+         echo "Scanning..."
+         sleep 3s
          choose_wifi
 
-         echo "This file should ONLY contain ${WiFi_name}'s password" >> WiFi_password.txt
+         echo "This file should ONLY contain ${WiFi_name}'s password" \
+         >>   WiFi_password.txt
          nano WiFi_password.txt
          
-         ( wpa_passphrase ${WiFi_name} < WiFi_password.txt ) >> ${WPA_config_file}
+         wpa_passphrase "${WiFi_name}" < WiFi_password.txt \
+         >> "${WPA_config_file}"
          
-         # Need to reload with new configuration
-         wpa_cli reconfigure
-
+         wpa_cli reconfigure    # Need to reload with new configuration
          dhcpcd
 }
