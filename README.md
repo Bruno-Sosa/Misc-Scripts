@@ -1,6 +1,6 @@
 # Misc-Scripts
 
-Right now, contains installations scripts for [Arch Linux][1] and [Gentoo][2].
+Contains installations scripts for [Arch Linux][1] and [Gentoo][2].
 Please only use if:
 
 - You're comfortable with using scripts that are:
@@ -10,7 +10,10 @@ Please only use if:
 - You are comfortable debugging bash scripts
 
 Currently the top priority is clarity, after that its sanity.
-So while `wifi-menu` is easier to use, I have been bitten by it too many times, and prefer using `wpa_supplicant` directly instead.
+For example:
+while `wifi-menu` is easier to use,
+I have been bitten by it too many times,
+and prefer using `wpa_supplicant` directly instead.
 
 I still don't have the use case for these scripts well defined.
 
