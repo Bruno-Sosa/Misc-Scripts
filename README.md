@@ -24,7 +24,15 @@ while `wifi-menu` is easier to use,
 I have been bitten by it too many times,
 and prefer using `wpa_supplicant` directly instead.
 
-Maybe with each script include a `.txt` file explaining commands and their flags, while referencing documentation (wiki or `man`). 
+Maybe with each script include a `.txt` file explaining commands and their flags, while referencing documentation (wiki or `man`).
+
+Understand Consequences of:
+
+- Reapeting an `installation_step` several times. Does it break anything?
+- Difference between:
+  1.  doing all in one session,
+  2.  and logging out inbetween functions
+
 
 ## Finish the installation in a minimal fashion.
 Try to get a bootable installation as quickly as possible.
