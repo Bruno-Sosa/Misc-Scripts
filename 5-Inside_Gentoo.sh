@@ -24,7 +24,7 @@ function use_flags {
 
 function kernel {
          emerge --ask sys-kernel/gentoo-sources
-         # So that you can use `lspci`
+         # So that you can use `lspci`:
          emerge --ask sys-apps/pciutils
 
          cd /usr/src/linux
