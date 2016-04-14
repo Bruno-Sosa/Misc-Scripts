@@ -1,6 +1,6 @@
 # Misc-Scripts
 
-Right now, contains installations scripts for [Archlinux][1] and [Gentoo][2].
+Right now, contains installations scripts for [Arch Linux][1] and [Gentoo][2].
 Please only use if:
 
 - You're comfortable with using scripts that are:
