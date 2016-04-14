@@ -1,6 +1,12 @@
+function choose_network_interface {
+         iwconfig
+         echo "Choose a network interface: "
+         read Network_interface
+}
+
 function choose_wifi {
          wpa_cli scan_results
-         echo "Choose a WiFi:"
+         echo "Choose a WiFi: "
          read WiFi_name
 }
 
@@ -11,7 +17,8 @@ function start_wifi {
 
          WPA_config_file='/etc/wpa_supplicant/wpa_supplicant.conf'
 
-         wpa_supplicant -B -i "${net_if}" -c "${WPA_config_file}"
+         choose_network_infertace
+         wpa_supplicant -B -i "${Network_interface}" -c "${WPA_config_file}"
 
          wpa_cli scan; echo "Scanning..."; sleep 3s
          choose_wifi
