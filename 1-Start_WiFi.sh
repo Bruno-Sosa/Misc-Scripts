@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function choose_network_interface {
          iwconfig
          echo "Choose a network interface: "
