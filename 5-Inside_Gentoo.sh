@@ -9,3 +9,15 @@ function pre_emerge {
          eselect news read
          eselect profile list
 }
+
+function use_flags {
+         # Defaults
+         less /usr/portage/profiles/use.desc
+         # User Defined
+         echo 'CFLAGS="-march=native -O2 -pipe"' >> /etc/portage/make.conf
+         echo 'CXXFLAGS="${CFLAGS}"'             >> /etc/portage/make.conf
+
+         num=$(nproc); let num++
+         echo MAKEOPTS=\"-j ${num}\"             >> /etc/portage/make.conf
+         nano /etc/portage/make.conf
+}
