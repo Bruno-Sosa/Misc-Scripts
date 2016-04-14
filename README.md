@@ -28,11 +28,11 @@ It felt great booting into your system for the first time, and not being greeted
 However if your using source-based distros this will diffentively not scale.
 So in order to maintain an uniform structure, the installation of things not required to boot will not be included.
 
-### Other things might be removed
+#### Other things might be removed
 - locale related stuff
 - log installation (maybe, since you don't have anything to log yet)
 
-### Things that are needed
+#### Things that are needed
 - If you have multiple partitions: fstab and maybe initramfs
 - If an essential partition isn't ext4: the needed filesystem package installed
 
