@@ -19,6 +19,8 @@ while `wifi-menu` is easier to use,
 I have been bitten by it too many times,
 and prefer using `wpa_supplicant` directly instead.
 
+Maybe with each script include a `.txt` file explaining commands and their flags, while referencing documentation (wiki or `man`). 
+
 ## Finish the installation in a minimal fashion.
 Try to get a bootable installation as quickly as possible.
 Before when I was using Arch, I would try to get everything (ie a Desktop Enviroment) installed with pacstrap.
