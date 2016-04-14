@@ -18,7 +18,7 @@ function use_flags {
          echo 'CXXFLAGS="${CFLAGS}"'             >> /etc/portage/make.conf
 
          num=$(nproc); let num++
-         echo MAKEOPTS=\"-j ${num}\"             >> /etc/portage/make.conf
+         printf 'MAKEOPTS="-j %s"' "${num}"      >> /etc/portage/make.conf
          nano /etc/portage/make.conf
 }
 
