@@ -20,9 +20,13 @@ function start_wifi {
          choose_network_infertace
          
          WPA_config_file='/etc/wpa_supplicant/wpa_supplicant.conf'
-         wpa_supplicant -B \
-         -i "${Network_interface}" \
-         -c "${WPA_config_file}"
+
+         echo 'ctrl_interface=/var/run/wpa_supplicant' \
+            > "${WPA_config_file}"
+
+         wpa_supplicant -B           \
+           -i "${Network_interface}" \
+           -c "${WPA_config_file}"
 
          wpa_cli scan
          echo "Scanning..."
