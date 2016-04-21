@@ -15,17 +15,23 @@ Please fill Settings.txt with values that you already know.
 ### Clarity (Newbies come hither)
 Initially, the goal was to keep it easy to understand for newcomers so that they may create their own installation scripts.
 This is still the case, however I believe architecturally having a centralized file to retrieve values from is initially non-obvious for newbies.
-At least that was the case for me :) so just be aware of it.
+At least, that was the case for me :) so just be aware of it.
 
 Unfortunately, one of the consequences of this added feature is that it adds extra if-else logic to the scripts.
 So far, it has lead to a bit of refactoring, and the parts containing said logic can mainly be ignored.
-This way it isn't a matter of either:
+Also, the structure of the scripts should be such that the straight forward (non-interactive) way of doing things are at the top.
+The benefit of this (or at least the justification, heh) is that this way it isn't a matter of either:
 
 - running the scripts completely interactively, inputting the information it asks of you.
-- or open up the scripts, delete the interactive parts, and write in it the information required.
+- or opening up the scripts, deleting the interactive parts, and writing directly in it the information it requires to function.
 
-It is (IMHO) much clearer, what information you can omit during the installation by preselecting it in `Settings.txt`.
-Also, the structure of the scripts should be such that the straight forward (non-interactive) way of doing things is at the top.
+It is IMHO much clearer;
+
+- not only what information you can omit during the installation by preselecting it in `Settings.txt` (hopefully all),
+- but also what the consequences of doing so are, i.e. what is skipped and how it affects the scripts' execution.
+
+This clarity will hopefully allow a newbie to progress in a more granular manner.
+The script doesn't need to be understood in it's entirety (although that's the goal), in order to be immediately useful.
 
 ### Sanity
 Currently the top priority is clarity, after that its sanity.
