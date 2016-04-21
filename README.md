@@ -1,44 +1,55 @@
 # Misc-Scripts
-[url1]: https://wiki.archlinux.org/index.php/Installation_guide
-[url2]: https://wiki.gentoo.org/wiki/Handbook:Main_Page
-
 Contains installations scripts for [Arch Linux][url1] and [Gentoo][url2].
-Please only use if:
-
-- You're comfortable with using scripts that are:
-  - a work in progress
-  - from someone random on the internet
-- You have already done non-graphical installations a few times.
-- You are comfortable debugging bash scripts
+The names of the files are intended to be rather self-explanatory,
+and should give you a good overview of what 
 
 NOTE: Partitioning and formatting isn't covered yet, as screwing that up is a big no no.
 
+I recommend using [gparted][url3] to partition your disk, or the tools included in the live-USB of the distro you're trying to install.
 
-I still don't have the use case for these scripts well defined,
-so it may evolve with time, but this is what I'm trying to accomplish:
+## Settings.txt
+You would probably like to know that `Settings.txt` is used by the scripts
 
-## Clarity and Sanity
+Please fill Settings.txt with values that you already know.
+
+
+# Goals
+## Clarity and Sanity (Newbies come hither)
+### Clarity
+Initially, the goal was to keep it easy to understand for newcomers so that they may create their own installation scripts.
+This is still the case, however I believe architecturally having a centralized file to retrieve values from is initially non-obvious for newbies.
+At least that was the case for me :) so just be aware of it.
+
+Unfortunately, one of the consequences of this added feature is that it adds extra if-else logic to the scripts.
+So far, it has lead to a bit of refactoring, and the parts containing said logic can mainly be ignored.
+This way it isn't a matter of either:
+
+- running the scripts completely interactively, inputting the information it asks of you.
+- or open up the scripts, delete the interactive parts, and write in it the information required.
+
+It is (IMHO) much clearer, what information you can omit during the installation by preselecting it in `Settings.txt`.
+Also, the structure of the scripts should be such that the straight forward (non-interactive) way of doing things is at the top.
+
+### Sanity
 Currently the top priority is clarity, after that its sanity.
 For example:
 while `wifi-menu` is easier to use,
 I have been bitten by it too many times,
 and prefer using `wpa_supplicant` directly instead.
 
-Maybe with each script include a `.txt` file explaining commands and their flags, while referencing documentation (wiki or `man`).
-
 Understand Consequences of:
 
-- Reapeting an `installation_step` several times. Does it break anything?
+- Repeating an `installation_step` several times. Does it break anything?
 - Difference between:
   1.  doing all in one session,
-  2.  and logging out inbetween functions
+  2.  and logging out in-between functions
 
 
 ## Finish the installation in a minimal fashion.
 Try to get a bootable installation as quickly as possible.
-Before when I was using Arch, I would try to get everything (ie a Desktop Enviroment) installed with pacstrap.
+Before when I was using Arch, I would try to get everything (ie a Desktop Environment) installed with pacstrap.
 It felt great booting into your system for the first time, and not being greeted by a console demanding more work.
-However if your using source-based distros this will diffentively not scale.
+However if your using source-based distros this will definitively not scale.
 So in order to maintain an uniform structure, the installation of things not required to boot will not be included.
 
 #### Other things might be removed
@@ -48,3 +59,16 @@ So in order to maintain an uniform structure, the installation of things not req
 #### Things that are needed
 - If you have multiple partitions: fstab and maybe initramfs
 - If an essential partition isn't ext4: the needed filesystem package installed
+
+# Achtung!
+Please only use if:
+
+1. You have already done non-graphical installations a few times.
+2. You're comfortable with using scripts that are:
+  - a work in progress
+  - from someone random on the internet
+3. You are comfortable debugging bash scripts
+
+
+[url1]: https://wiki.archlinux.org/index.php/Installation_guide
+[url2]: https://wiki.gentoo.org/wiki/Handbook:Main_Page
