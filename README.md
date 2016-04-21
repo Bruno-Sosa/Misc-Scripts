@@ -72,3 +72,4 @@ Please only use if:
 
 [url1]: https://wiki.archlinux.org/index.php/Installation_guide
 [url2]: https://wiki.gentoo.org/wiki/Handbook:Main_Page
+[url3]: http://gparted.org/livecd.php
