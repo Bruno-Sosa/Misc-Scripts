@@ -1,0 +1,3 @@
+Network_interface=""
+WPA_config_file=""
+WiFi_name=""
