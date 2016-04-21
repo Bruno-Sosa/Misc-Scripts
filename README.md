@@ -1,21 +1,18 @@
 # Misc-Scripts
 Contains installations scripts for [Arch Linux][url1] and [Gentoo][url2].
-The names of the files are intended to be rather self-explanatory,
-and should give you a good overview of what 
+The files-names are intended to be rather self-explanatory, and should give you a good overview of what the scope of this project is.
+You are most welcome to take a peek at the scripts to see what they're actually doing too!
 
 NOTE: Partitioning and formatting isn't covered yet, as screwing that up is a big no no.
+I recommend using [GParted][url3] to partition your disk, or using the tools included in the live-USB of the distro you're trying to install.
 
-I recommend using [gparted][url3] to partition your disk, or the tools included in the live-USB of the distro you're trying to install.
-
-## Settings.txt
-You would probably like to know that `Settings.txt` is used by the scripts
-
+**Settings.txt:** You would probably like to know that `Settings.txt` is used by the scripts...
 Please fill Settings.txt with values that you already know.
 
 
 # Goals
-## Clarity and Sanity (Newbies come hither)
-### Clarity
+## Clarity and Sanity
+### Clarity (Newbies come hither)
 Initially, the goal was to keep it easy to understand for newcomers so that they may create their own installation scripts.
 This is still the case, however I believe architecturally having a centralized file to retrieve values from is initially non-obvious for newbies.
 At least that was the case for me :) so just be aware of it.
