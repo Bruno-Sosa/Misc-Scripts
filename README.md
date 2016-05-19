@@ -38,11 +38,10 @@ while `wifi-menu` is easier to use,
 I have been bitten by it's behaviour too many times,
 and prefer using `wpa_supplicant` directly instead.
 
-TODO:
-Understand consequences of:
+TODO: Understand consequences of:
 
-- Repeating an `installation_step` several times. Does it break anything?
-- Difference between:
+-[] Repeating an `installation_step` several times. Does it break anything?
+-[] Difference between:
   1.  doing all in one session,
   2.  and logging out in-between functions
 
