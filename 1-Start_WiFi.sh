@@ -6,7 +6,7 @@ function start_wifi {
          killall wpa_supplicant # Prevent already running errors
          killall dhcpcd         # Prevent already running errors
 
-         Start_Wifi_Settings    # If successful, will exit 
+         Get_Wifi_Settings      # If successful, 
 
          wpa_supplicant -B -i "${Network_interface}" -c "${WPA_config_file}"
          dhcpcd
@@ -16,16 +16,18 @@ function start_wifi {
 function Start_Wifi_Settings {
 
          if [[ -z "${Network_interface}" ]]; then
-         choose_network_interface;           fi
+            choose_network_interface;
+         fi
 
          if [[ -z "${WPA_config_file}"   ]]; then
-         create_network_configuration_1
+
+            create_network_configuration_1
 
             if [[ -z "${WiFi_name}" ]]; then
-            choose_wifi               ; fi
-
-         create_network_configuration_2;     fi
-
+               choose_wifi
+            fi
+            create_network_configuration_2
+         fi
 }
 
 function choose_network_interface {
