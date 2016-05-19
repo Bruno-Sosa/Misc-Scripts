@@ -3,7 +3,7 @@ Contains installations scripts for [Arch Linux][url1] and [Gentoo][url2].
 The files-names are intended to be rather self-explanatory, and should give you a good overview of what the scope of this project is.
 You are most welcome to take a peek at the scripts to see what they're actually doing too!
 
-NOTE: Partitioning and formatting isn't covered yet, as screwing that up is a big no no.
+**Note:** Partitioning and formatting isn't covered yet, as screwing that up is a big no no.
 I recommend using [GParted][url3] to partition your disk, or using the tools included in the live-USB of the distro you're trying to install.
 
 **Settings.txt:** With this file you can predefine stuff, allowing the scripts to skips some steps, resulting in an installation with less interaction.
@@ -35,10 +35,11 @@ The script doesn't need to be understood in it's entirety (although that's the g
 Currently the top priority is clarity, after that its sanity.
 For example:
 while `wifi-menu` is easier to use,
-I have been bitten by it too many times,
+I have been bitten by it's behaviour too many times,
 and prefer using `wpa_supplicant` directly instead.
 
-Understand Consequences of:
+TODO:
+Understand consequences of:
 
 - Repeating an `installation_step` several times. Does it break anything?
 - Difference between:
@@ -49,11 +50,11 @@ Understand Consequences of:
 ### Finish the installation in a minimal fashion.
 Try to get a bootable installation as quickly as possible.
 Before when I was using Arch, I would try to get everything (ie a Desktop Environment) installed with `pacstrap`.
-It felt great booting into your system for the first time, and not being greeted by a console demanding more work.
-However if your using source-based distros this will definitively not scale.
+It felt great booting into your system for the first time, instead of being greeted by a console demanding more work.
+However, if you're using a source-based distro this will definitively not scale.
 So in order to maintain an uniform structure, the installation of things not required to boot will not be included.
 
-#### Other things might be removed
+#### Other things that might be removed
 - locale related stuff
 - log installation (maybe, since you don't have anything to log yet)
 
