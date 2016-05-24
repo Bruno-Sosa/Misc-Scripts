@@ -1,6 +1,11 @@
 #!/bin/bash
 # Usage: bash <filename>
-source Settings.sh
+set -o errexit 
+set -o noclobber
+set -o xtrace 
+source Settings/Network_interface.txt
+source Settings/WPA_config_file.txt
+set -o nounset
 
 killall wpa_supplicant # Prevent already running errors
 killall dhcpcd         # Prevent already running errors
