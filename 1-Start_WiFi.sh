@@ -6,6 +6,7 @@ function start_wifi {
          killall wpa_supplicant # Prevent already running errors
          killall dhcpcd         # Prevent already running errors
 
+# Need to rename:
          Get_Wifi_Settings      # If successful, 
 
          wpa_supplicant -B -i "${Network_interface}" -c "${WPA_config_file}"
@@ -13,6 +14,7 @@ function start_wifi {
 	 exit
 }
 
+# Need to rename:
 function Start_Wifi_Settings {
 
          if [[ -z "${Network_interface}" ]]; then
@@ -20,13 +22,13 @@ function Start_Wifi_Settings {
          fi
 
          if [[ -z "${WPA_config_file}"   ]]; then
-
-            create_network_configuration_1
+            prepare_network_configuration
 
             if [[ -z "${WiFi_name}" ]]; then
                choose_wifi
             fi
-            create_network_configuration_2
+
+            create_network_configuration
          fi
 }
 
@@ -37,7 +39,7 @@ function choose_network_interface {
          read Network_interface
 }
 
-function create_network_configuration_1 {
+function prepare_network_configuration {
 
          WPA_config_file='/etc/wpa_supplicant/wpa_supplicant.conf'
 
@@ -56,7 +58,7 @@ function choose_wifi {
          read WiFi_name
 }
 
-function create_network_configuration_2 {
+function create_network_configuration {
 
          echo "The following file should ONLY contain ${WiFi_name}'s password"
          echo "Press any key to continue..."
