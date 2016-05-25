@@ -1,76 +1,95 @@
-# Misc-Scripts
-Contains installations scripts for [Arch Linux][url1] and [Gentoo][url2].
-The files-names are intended to be rather self-explanatory, and should give you a good overview of what the scope of this project is.
-You are most welcome to take a peek at the scripts to see what they're actually doing too!
+See the README.md of the Settings.txt branch if you haven't already.
 
-**Note:** Partitioning and formatting isn't covered yet, as screwing that up is a big no no.
-I recommend using [GParted][url3] to partition your disk, or using the tools included in the live-USB of the distro you're trying to install.
+# The goal of this branch
+was to address the issue highlighted in this paragraph: (of the Settings.txt's README.md)
 
-**Settings.txt:** With this file you can predefine stuff, allowing the scripts to skips some steps, resulting in an installation with less interaction.
-This is where the bulk of usefulness comes from IMHO, as it allows for a more streamlined, less ad-hoc installation.
+> Unfortunately, one of the consequences of this added feature is that it adds extra if-else logic to the scripts.
 
-# Goals
-## Clarity (Newbies come hither)
-Initially, the goal was to keep it easy to understand for newcomers so that they may create their own installation scripts.
-This is still the case, however I believe architecturally having a centralized file to retrieve values from is initially non-obvious for newbies.
-At least, that was the case for me :) so just be aware of it.
+It bugged me that you would open a file, and
+instead of seeing either:
 
-Unfortunately, one of the consequences of this added feature is that it adds extra if-else logic to the scripts.
-So far, it has lead to a bit of refactoring, and the parts containing said logic can mainly be ignored.
-Also, the structure of the scripts should be such that the straight forward (non-interactive) way of doing things are at the top.
-The benefit of this (or at least the justification, heh) is that this way it isn't a matter of either:
+- the bare minimum required to perform that step, or
+- much more code providing interactivity,
 
-- running the scripts completely interactively, inputting the information it asks of you.
-- or editing the scripts one by one, deleting the interactive parts, and writing directly the information it requires to function.
+you would see both at the same time.
 
-IMHO, it is much clearer;
+Which is fine in most cases,
+exept this project was created with the explicit purpose of KISS,
+so that newbies could:
 
-- not only what information you can omit during the installation, by predefining it in `Settings.txt` (hopefully most),
-- but also what the consequences of doing so are, i.e. what is skipped and how it affects the scripts' execution.
+- peform an installation in an user-friendly way,
+- see all the commands of an installation inside of a script.
+  (in case they wanted to write their own)
 
-This clarity will hopefully allow a newbie to progress in a more granular manner.
-The script doesn't need to be understood in it's entirety (although that's the goal), in order to be immediately useful.
+# The idea for this branch
+was to execute a script contained in `var-helpers/`
+if the corresponding variable was empty.
+I encountered 3 problems.
 
-## Sanity
-Currently the top priority is clarity, after that its sanity.
-For example:
-while `wifi-menu` is easier to use,
-I have been bitten by it's behaviour too many times,
-and prefer using `wpa_supplicant` directly instead.
+## Problem 1
+How know if a variable is empty.
+I could probably have used some sort of loop,
+inside of which I used `-z "$var"`.
+However, what I would have prefered is the following:
 
-TODO: Understand consequences of:
+> I could have an extra script that with `set` (no params) checks if a variable is empty.
+> For example: `set | grep '^[^_].*=$'`
 
--[] Repeating an `installation_step` several times. Does it break anything?
--[] Difference between:
-  1.  doing all in one session,
-  2.  and logging out in-between functions
+Despite that,
+I didn't like the idea of having an extra script which handles other scripts.
+I've tried that sort of meta-script thing before, and it was non-elegant.
 
+## Solution?
+The idea was to have `Settings.txt` by default get all values from the scripts,
+That is,
+for all all the variables it would contain something like `var=$(script)`.
+That way,
+if someone wanted to provide their own values,
+they would have to change that text.
 
-### Finish the installation in a minimal fashion.
-Try to get a bootable installation as quickly as possible.
-Before when I was using Arch, I would try to get everything (ie a Desktop Environment) installed with `pacstrap`.
-It felt great booting into your system for the first time, instead of being greeted by a console demanding more work.
-However, if you're using a source-based distro this will definitively not scale.
-So in order to maintain an uniform structure, the installation of things not required to boot will not be included.
+In either case, the variable isn't empty.
 
-#### Other things that might be removed
-- locale related stuff
-- log installation (maybe, since you don't have anything to log yet)
+## Nope 1:
+ie Problem 2.
 
-#### Things that are needed
-- If you have multiple partitions: fstab and maybe initramfs
-- If an essential partition isn't ext4: the needed filesystem package installed
+Since `set -o` aren't exported to subshells,
+I had to source all the scripts that I wanted, 
+if e.g. `set -o errexit` were to work (without a bunch of duplication that is).
+This means I couldn't do `./file.sh` or `bash file.sh`.
 
-# Achtung!
-Please only use if:
+## Nope 2:
+ie Problem 3.
 
-1. You have already done non-graphical installations a few times.
-2. You're comfortable with using scripts that are:
-  - a work in progress
-  - from someone random on the internet
-3. You are comfortable debugging bash scripts
+The reason I'm not doing `var=$(script)` is that would massively complicate things.
+The scripts are aimed at providing interactivity.
+That mainly means it's going to print questions to stdout.
+So, either I print everything exept the value to stderr (which is stupid),
+or I use some weird `var=$(script | tail)`.
+Either way I didn't want to have to deal with that.
 
+## Solution?
+For this reason,
+I moved `var-helpers/` to `Settings/`.
+There each file would contain either:
+- the value of a var, or 
+- a script that would provide that value.
 
-[url1]: https://wiki.archlinux.org/index.php/Installation_guide
-[url2]: https://wiki.gentoo.org/wiki/Handbook:Main_Page
-[url3]: http://gparted.org/livecd.php
+The idea is the same as previous solution paragraph.
+
+> if someone wanted to provide their own values,
+> they would have to change that text.
+
+Since these files would be `source`d,
+there would be no scope, and the integration would be easy.
+There would be no need for `var=$(script | tail)`.
+
+However, being told:
+"hey, this file contains code that you can just overwrite"
+isn't exactly the best user-experience.
+And, what if later they want to use that code that they just deleted??
+
+> but, why move it into seperate files in `Settings/`, in the first place?
+> Why not keep it in `Settings.txt` by doing `var=$(source script)`? 
+
+Becuase, as all the main scripts source `Settings.txt`.
+That means that when main script is run, all un-related helping scripts are run.
